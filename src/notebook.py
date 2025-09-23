@@ -1,5 +1,5 @@
 #1 Instala as bibliotecas necessárias
-pip install gcsfs
+%pip install gcsfs
 import gcsfs
 import pyarrow.parquet as pq
 import pandas as pd
