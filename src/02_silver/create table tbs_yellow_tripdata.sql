@@ -1,4 +1,4 @@
-create table silver_zone.tbs_yellow_tripdata (
+create table tbs_yellow_tripdata (
   VendorID                  INT64       OPTIONS(description="Código do fornecedor"),
   tpep_pickup_datetime      TIMESTAMP   OPTIONS(description="Data e hora de início da viagem"),
   tpep_dropoff_datetime     TIMESTAMP   OPTIONS(description="Data e hora de término da viagem"),

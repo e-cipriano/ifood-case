@@ -43,14 +43,14 @@ df.createOrReplaceTempView("yellow_tripdata")
 
 
 #3 Cria a tabela persistente com overwrite (criação inicial)
-df.write.mode("overwrite").saveAsTable("yellow_tripdata_2023")
+df.write.mode("overwrite").saveAsTable("yellow_tripdata")
 #3.1 Verifica os dados na tabela criada
 df.show()
 
 #4 Lista de meses adicionais
 meses = ["02", "03", "04", "05"]
 #4.1 Captura o schema da tabela persistida
-base_schema = spark.table("yellow_tripdata_2023").schema
+base_schema = spark.table("yellow_tripdata").schema
 
 for mes in meses:
     gcs_file_path = f"landing_tripdata/yellow_tripdata/yellow_tripdata_2023-{mes}.parquet"
@@ -65,15 +65,15 @@ for mes in meses:
 
     
     #4.1.3 Adiciona os dados à tabela existente
-    df_mes.write.mode("append").saveAsTable("yellow_tripdata_2023")
+    df_mes.write.mode("append").saveAsTable("yellow_tripdata")
     
 # 4.2 Verifica os dados na tabela criada
-df_final = spark.table("yellow_tripdata_2023")
+df_final = spark.table("yellow_tripdata")
 df_final.show()
 
 # Consulta rápida
-spark.sql("SELECT COUNT(*) FROM yellow_tripdata_2023").show()
+spark.sql("SELECT COUNT(*) FROM yellow_tripdata").show()
 
 # Visualiza algumas linhas
-spark.sql("SELECT * FROM yellow_tripdata_2023 LIMIT 10").show()
+spark.sql("SELECT * FROM yellow_tripdata LIMIT 10").show()
 
