@@ -26,31 +26,30 @@ CREATE TABLE IF NOT EXISTS hive_metastore.silver.tbs_yellow_tripdata (
 
 -- criando uma CTE para tratamento e processamento de dados utilizando um delta (para casos de produçao e dados mais atuais)
 
-CREATE TEMP VIEW yellow_tripdata as (
+CREATE TEMP VIEW tmp_s_yellow_tripdata as (
 SELECT
-  CAST(VendorID               AS INT)       AS VendorID,
-  CAST(tpep_pickup_datetime   AS TIMESTAMP) AS tpep_pickup_datetime,
-  CAST(tpep_dropoff_datetime  AS TIMESTAMP) AS tpep_dropoff_datetime,
-  CAST(passenger_count        AS INT)       AS passenger_count,
-  CAST(trip_distance          AS DOUBLE)    AS trip_distance,
-  CAST(RatecodeID             AS INT)       AS RatecodeID,
-  CAST(store_and_fwd_flag     AS STRING)    AS store_and_fwd_flag,
-  CAST(PULocationID           AS INT)       AS PULocationID,
-  CAST(DOLocationID           AS INT)       AS DOLocationID,
-  CAST(payment_type           AS INT)       AS payment_type,
-  CAST(fare_amount            AS DOUBLE)    AS fare_amount,
-  CAST(extra                  AS DOUBLE)    AS extra,
-  CAST(mta_tax                AS DOUBLE)    AS mta_tax,
-  CAST(tip_amount             AS DOUBLE)    AS tip_amount,
-  CAST(tolls_amount           AS DOUBLE)    AS tolls_amount,
-  CAST(improvement_surcharge  AS DOUBLE)    AS improvement_surcharge,
-  CAST(total_amount           AS DOUBLE)    AS total_amount,
-  CAST(congestion_surcharge   AS DOUBLE)    AS congestion_surcharge
+  CAST(VendorID                   AS INT)       AS VendorID,
+  CAST(tpep_pickup_datetime       AS TIMESTAMP) AS tpep_pickup_datetime,
+  CAST(tpep_dropoff_datetime      AS TIMESTAMP) AS tpep_dropoff_datetime,
+  CAST(ifnull(passenger_count,1)  AS INT)       AS passenger_count,
+  CAST(trip_distance              AS DOUBLE)    AS trip_distance,
+  CAST(RatecodeID                 AS INT)       AS RatecodeID,
+  CAST(store_and_fwd_flag         AS STRING)    AS store_and_fwd_flag,
+  CAST(PULocationID               AS INT)       AS PULocationID,
+  CAST(DOLocationID               AS INT)       AS DOLocationID,
+  CAST(payment_type               AS INT)       AS payment_type,
+  CAST(fare_amount                AS DOUBLE)    AS fare_amount,
+  CAST(extra                      AS DOUBLE)    AS extra,
+  CAST(mta_tax                    AS DOUBLE)    AS mta_tax,
+  CAST(tip_amount                 AS DOUBLE)    AS tip_amount,
+  CAST(tolls_amount               AS DOUBLE)    AS tolls_amount,
+  CAST(improvement_surcharge      AS DOUBLE)    AS improvement_surcharge,
+  CAST(total_amount               AS DOUBLE)    AS total_amount,
+  CAST(congestion_surcharge       AS DOUBLE)    AS congestion_surcharge
 FROM hive_metastore.default.yellow_tripdata
 WHERE VendorID               IS NOT NULL
   AND tpep_pickup_datetime   IS NOT NULL
   AND tpep_dropoff_datetime  IS NOT NULL
-  AND passenger_count        IS NOT NULL
   AND total_amount           IS NOT NULL
   AND date_format(tpep_pickup_datetime, "yyyy-MM-dd")
       BETWEEN date('2023-01-01') -- Use delta inicio "date_sub(current_date(), 60)"
@@ -61,7 +60,7 @@ WHERE VendorID               IS NOT NULL
 -- Realizando 'upsert' update + insert na tabela final utilizando o CTE tratado:
 
 MERGE INTO silver.tbs_yellow_tripdata AS target
-USING yellow_tripdata AS source
+USING tmp_s_yellow_tripdata AS source
   ON  target.VendorID              = source.VendorID
   AND target.tpep_pickup_datetime  = source.tpep_pickup_datetime
   AND target.tpep_dropoff_datetime = source.tpep_dropoff_datetime

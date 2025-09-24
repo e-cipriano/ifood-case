@@ -9,7 +9,8 @@ CREATE TABLE IF NOT EXISTS hive_metastore.gold.tbg_yellow_tripdata (
   tpep_pickup_datetime    TIMESTAMP,
   tpep_dropoff_datetime   TIMESTAMP,
   passenger_count         INT,
-  total_amount            DOUBLE
+  total_amount            DOUBLE,
+    tpep_pickup_hour        INT
 );
 
 -- criando uma CTE para tratamento e processamento de dados utilizando um delta (para casos de produção e dados mais atuais)
@@ -20,7 +21,8 @@ SELECT
   CAST(tpep_pickup_datetime   AS TIMESTAMP) AS tpep_pickup_datetime,
   CAST(tpep_dropoff_datetime  AS TIMESTAMP) AS tpep_dropoff_datetime,
   CAST(passenger_count        AS INT)       AS passenger_count,
-  CAST(total_amount           AS DOUBLE)    AS total_amount
+  CAST(total_amount           AS DOUBLE)    AS total_amount,
+  DATEPART("HOUR", tpep_pickup_datetime)      AS tpep_pickup_hour
   
 FROM hive_metastore.silver.tbs_yellow_tripdata
 );
@@ -45,12 +47,14 @@ WHEN NOT MATCHED THEN
     tpep_pickup_datetime,
     tpep_dropoff_datetime,
     passenger_count,
-    total_amount
+    total_amount,
+    tpep_pickup_hour
   )
   VALUES (
     source.VendorID,
     source.tpep_pickup_datetime,
     source.tpep_dropoff_datetime,
     source.passenger_count,
-    source.total_amount
+    source.total_amount,
+    source.tpep_pickup_hour
   );
