@@ -10,7 +10,8 @@ Os documentos foram armazenados no GCP Cloud Storage: [gs://landing_tripdata/yel
 O notebook.py é o arquivo de execução de código no Databricks para ELT e gravação dos dados em tabela. Use um notebook e cole o código para a correta execução. Também disponível no databricks publicamente: https://databricks-prod-cloudfront.cloud.databricks.com/public/4027ec902e239c93eaaa8714f173bcfc/4018484445800316/2896706219050184/1868833645592944/latest.html
 
 Artefatos:
-src/01_bronze/
+ 
+ src/01_bronze/
 - notebook.py
 - create table yellow_tripdata.sql
 
@@ -26,7 +27,8 @@ Tabelas origem:
 ## SILVER ZONE
 
 Artefatos:
-src/02_silver/
+
+ src/02_silver/
 - create prc_tbs_yellow_tripdata.sql
 - create table tbs_yellow_tripdata.sql
 
