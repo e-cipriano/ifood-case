@@ -1,3 +1,4 @@
+%python
 #1 Instala as bibliotecas necessárias
 %pip install gcsfs
 import gcsfs
@@ -5,7 +6,7 @@ import pyarrow.parquet as pq
 import pandas as pd
 from pyspark.sql import SparkSession
 
-#2 Credenciais da conta de serviço (O Databricks Community Edition não estava reconhecendo o arquivo json para recuperar via codigo, o ideal é ocultar e prteger as credenciais.) 
+#2 Credenciais da conta de serviço (O Databricks Community Edition não estava reconhecendo o arquivo json para recuperar via codigo, o ideal é ocultar e proteger as credenciais.) 
 token_dict = {
   "type": "service_account",
   "project_id": "ifood-case-472923",
