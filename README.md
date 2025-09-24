@@ -11,8 +11,8 @@ O notebook.py é o arquivo de execução de código no Databricks para ELT e gra
 
 Artefatos:
 src/01_bronze/
-|- notebook.py
-|- create table yellow_tripdata.sql
+- notebook.py
+- create table yellow_tripdata.sql
 
 A tabela foi criada no Databricks em hive_metastore/default/yellow_tripdata , usando as
 
@@ -27,8 +27,8 @@ Tabelas origem:
 
 Artefatos:
 src/02_silver/
-|- create prc_tbs_yellow_tripdata.sql
-|- create table tbs_yellow_tripdata.sql
+- create prc_tbs_yellow_tripdata.sql
+- create table tbs_yellow_tripdata.sql
 
 
 ## GOLD ZONE
