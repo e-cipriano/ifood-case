@@ -25,6 +25,8 @@ Tabelas origem:
 - yellow_tripdata_2023_05 
 
 ## SILVER ZONE
+Os dados foram limpos para abrangencia dos camos tpep_pickup_datetime apenas para as datas de 2023-01-01 até 2023-05-31, pois a base tinha outras datas diferentes.
+Os dados nulos de passenger_count foram tratados para 1.
 
 Artefatos:
 - Notebook DataBricks publicado: [Notebook Silver 2025-09-23](https://databricks-prod-cloudfront.cloud.databricks.com/public/4027ec902e239c93eaaa8714f173bcfc/4018484445800316/2806729363855634/1868833645592944/latest.html)
@@ -36,14 +38,14 @@ Artefatos:
 
 
 ## GOLD ZONE
-em construção \n
+
 Os dados da silver-zone foram limpos e selecionados para a camada de consumo (gold-zone).
 
+Artefatos:
+- [Notebook Gold 2025-09-24](https://community.cloud.databricks.com/editor/notebooks/3647327772814130?o=4018484445800316#command/3647327772814131)
 
-
-
-
-
-
-
+  src/03_gold
+- procedure_tbg_yellow_tripdata.sql
+- create table tbg_yellow_tripdata.sql
+- proc_registry.sql
 
