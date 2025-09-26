@@ -42,10 +42,12 @@ Artefatos:
 Os dados da silver-zone foram limpos e selecionados para a camada de consumo (gold-zone).
 
 Artefatos:
-- [Notebook Gold 2025-09-24](https://community.cloud.databricks.com/editor/notebooks/3647327772814130?o=4018484445800316#command/3647327772814131)
+- [Notebook Gold 2025-09-24](https://databricks-prod-cloudfront.cloud.databricks.com/public/4027ec902e239c93eaaa8714f173bcfc/4018484445800316/3647327772814116/1868833645592944/latest.html)
+- [Notebook Respostas](https://community.cloud.databricks.com/editor/notebooks/3647327772814130?o=4018484445800316#command/3647327772814131)
 
   src/03_gold
 - procedure_tbg_yellow_tripdata.sql
 - create table tbg_yellow_tripdata.sql
 - proc_registry.sql
+- respostas.sql
 
