@@ -6,6 +6,8 @@ Arquivos Yellow de janeiro a Maio de 2023.
 
 Os documentos foram armazenados no GCP Cloud Storage: [gs://landing_tripdata/yellow_tripdata](https://console.cloud.google.com/storage/browser/landing_tripdata/yellow_tripdata;tab=objects?project=ifood-case-472923&supportedpurview=project&prefix=&forceOnObjectsSortingFiltering=false)
 
+Emissão da chave: [IMA-ADMIN](https://console.cloud.google.com/iam-admin/serviceaccounts/details/118161083804142647688/keys?project=ifood-case-472923&supportedpurview=project)
+
 ## BRONZE ZONE
 O notebook.py é o arquivo de execução de código no Databricks para ELT e gravação dos dados em tabela. Use um notebook e cole o código para a correta execução. Também disponível no databricks publicamente: https://databricks-prod-cloudfront.cloud.databricks.com/public/4027ec902e239c93eaaa8714f173bcfc/4018484445800316/2896706219050184/1868833645592944/latest.html
 
